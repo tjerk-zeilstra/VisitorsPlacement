@@ -13,17 +13,11 @@ namespace Logic.Logic
 
         public void AddSection(int numRows, int numChairs)
         {
-            Section sectionNew = new();
-            sectionNew.SectionName = GetSectionName(Sections.Count);
+            Section sectionNew = new(GetSectionName2());
 
             for (int i = 0; i < numRows; i++)
             {
-                Row row = new(i + 1);
-                sectionNew.Rows.Add(row);
-                for (int j = 0; j < numChairs; j++)
-                {
-
-                }
+                sectionNew.AddRows(numRows, numChairs);
             }
         }
 

@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic.Logic;
 
-namespace VisitorsPlacementTest
+namespace VisitorsPlacementTest.TestClasses
 {
     [TestClass]
     public class SectionLogicTest

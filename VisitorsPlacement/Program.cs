@@ -1,4 +1,7 @@
 ﻿using System;
+using Logic.Logic;
+using Logic.models;
+using Logic.Interfaces;
 
 namespace VisitorsPlacement
 {
@@ -6,10 +9,7 @@ namespace VisitorsPlacement
     {
         static void Main(string[] args)
         {
-            for (int i = 1; i <= 10; i++)
-            {
-                Console.WriteLine(i);
-            }
+            
         }
         
     }

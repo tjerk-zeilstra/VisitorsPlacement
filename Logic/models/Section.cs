@@ -19,7 +19,7 @@ namespace Logic.models
         public List<IRow> Rows = new();
 
 
-        public void AddRow(int numberOfRows, int numberOfChairs)
+        public void AddRows(int numberOfRows, int numberOfChairs)
         {
             for (int i = 1; i <= numberOfRows; i++)
             {

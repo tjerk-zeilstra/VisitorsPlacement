@@ -2,7 +2,7 @@
 using Logic.models;
 using Logic.Interfaces;
 
-namespace VisitorsPlacementTest
+namespace VisitorsPlacementTest.TestClasses
 {
     [TestClass]
     public class RowTest
