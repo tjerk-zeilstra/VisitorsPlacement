@@ -22,7 +22,7 @@ namespace VisitorsPlacementTest.TestClasses
             int numrow = 5;
 
             //act
-            section.AddRow(numrow, numchairs);
+            section.AddRows(numrow, numchairs);
 
             //asert
             CollectionAssert.AllItemsAreNotNull(section.Rows);

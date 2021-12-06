@@ -7,16 +7,20 @@ using Logic.Interfaces;
 
 namespace Logic.models
 {
-    public class Chair : IChair
+    public class Chair
     {
+        public Chair()
+        {
+
+        }
         public Chair(int chairnumber)
         {
             ChairNumber = chairnumber;
         }
-        public IPerson ChairPerson { get; private set; }
-        public int ChairNumber { get; private set; }
+        public Person ChairPerson { get; private set; }
+        public int ChairNumber { get; set; }
 
-        public void AddPerson(IPerson person)
+        public void AddPerson(Person person)
         {
             ChairPerson = person;
         }

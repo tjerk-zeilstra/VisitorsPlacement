@@ -7,13 +7,15 @@ using Logic.Interfaces;
 
 namespace VisitorsPlacementTest.FakeClasses
 {
-    class FakeRow : IRow
+    class FakeChair : IChair
     {
-        public int RowNumber { get; set; }
+        public int ChairNumber { get; set; }
 
-        public void AddChairs(int numberOfChairs, IChair chair)
+        public IPerson ChairPerson { get; }
+
+        public void AddPerson(IPerson person)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

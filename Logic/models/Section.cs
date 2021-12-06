@@ -12,12 +12,11 @@ namespace Logic.models
         public Section(string sectionName)
         {
             SectionName = sectionName;
+            Rows = new();
         }
 
-
         public string SectionName { get; set; }
-        public List<IRow> Rows = new();
-
+        public List<Row> Rows { get; set; }
 
         public void AddRows(int numberOfRows, int numberOfChairs)
         {

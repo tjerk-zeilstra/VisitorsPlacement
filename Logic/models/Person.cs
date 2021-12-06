@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 
 namespace Logic.models
 {
-    public class Person : IPerson
+    public class Person 
     {
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
+
+        public bool IsAdult(DateTime eventDate)
+        {
+            return DateOfBirth.AddYears(18) <= eventDate;
+        }
     }
 }

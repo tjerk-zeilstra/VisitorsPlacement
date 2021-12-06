@@ -7,18 +7,26 @@ using Logic.models;
 
 namespace Logic.Logic
 {
-    public class PlacementLogic
+    public class SportEvent
     {
-        public List<Section> Sections { get; set; }
+        public List<Section> _sections = new();
+        private List<Person> _indviduals = new();
+        private List<Group> _groups = new();
 
         public void AddSection(int numRows, int numChairs)
         {
             Section sectionNew = new(GetSectionName2());
+            _sections.Add(sectionNew);
 
             for (int i = 0; i < numRows; i++)
             {
-                sectionNew.AddRows(numRows, numChairs);
+                sectionNew.AddRows(numRows, numChairs); //TODO DI
             }
+        }
+
+        private void SortGroups()
+        {
+
         }
 
         private string GetSectionName(int sectionNum)
@@ -38,12 +46,12 @@ namespace Logic.Logic
 
         private string GetSectionName2()
         {
-            if (Sections.Count == 0)
+            if (_sections.Count == 0)
             {
                 return "A";
             }
 
-            string name = Sections.Last().SectionName;
+            string name = _sections.Last().SectionName;
             bool loop = true;
             int count = name.Length - 1;
 
@@ -52,15 +60,14 @@ namespace Logic.Logic
                 char currentchar = name[count];
                 if (currentchar == 'Z')
                 {
+                    name = name.Remove(count, 1);
                     if (count == 0)
-                    {
-                        name = name.Remove(count, 1);
+                    {   
                         name = name.Insert(count, "AA");
                         loop = false;
                     }
                     else
                     {
-                        name = name.Remove(count, 1);
                         name = name.Insert(count, "A");
                     }
                     
@@ -69,7 +76,8 @@ namespace Logic.Logic
                 else
                 {
                     name = name.Remove(count, 1);
-                    name = name.Insert(count, Convert.ToString(currentchar++));
+                    currentchar++;
+                    name = name.Insert(count, Convert.ToString(currentchar));
                     loop = false;
                 }
             }

@@ -6,6 +6,6 @@ namespace Logic.Interfaces
     {
         int RowNumber { get; set; }
 
-        void AddChairs(int numberOfChairs);
+        void AddChairs(int numberOfChairs, IChair chair);
     }
 }

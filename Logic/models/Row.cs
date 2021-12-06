@@ -7,20 +7,26 @@ using System.Threading.Tasks;
 
 namespace Logic.models
 {
-    public class Row : IRow
+    public class Row
     {
+        public Row()
+        {
+            Chairs = new();
+        }
         public Row(int rownumber)
         {
             RowNumber = rownumber;
+            Chairs = new();
         }
         public int RowNumber { get; set; }
-        public List<IChair> Chairs = new();
+        public List<Chair> Chairs { get; set; }
 
         public void AddChairs(int numberOfChairs)
         {
             for (int i = 1; i <= numberOfChairs; i++)
             {
-                Chairs.Add(new Chair(i)); //TODO DI
+                Chair chair = new(i);
+                Chairs.Add(chair);
             }
         }
     }

@@ -9,6 +9,15 @@ namespace Logic.models
 {
     public class Group
     {
-        public List<IPerson> People = new();
+        public Group()
+        {
+            People = new();
+        }
+        public List<Person> People = new();
+
+        public void AddPerson(Person person)
+        {
+            People.Add(person);
+        }
     }
 }
