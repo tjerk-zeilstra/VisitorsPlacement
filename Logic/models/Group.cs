@@ -19,5 +19,18 @@ namespace Logic.models
         {
             People.Add(person);
         }
+
+        public void SortPersons(DateTime eventDate)
+        {
+            for (int i = 0; i < People.Count; i++)
+            {
+                if (!People[i].IsAdult(eventDate))
+                {
+                    var temp = People[i];
+                    People.Remove(People[i]);
+                    People.Insert(0, temp);
+                }
+            }
+        }
     }
 }

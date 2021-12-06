@@ -24,7 +24,7 @@ namespace Logic.Logic
             }
         }
 
-        private void SortGroups()
+        public void SortGroups()
         {
 
         }
