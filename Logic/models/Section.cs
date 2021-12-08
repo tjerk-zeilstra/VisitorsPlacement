@@ -27,5 +27,25 @@ namespace Logic.models
                 row.AddChairs(numberOfChairs);
             }
         }
+
+        public int AvalibleSpaces()
+        {
+            int avaliblespace = 0;
+            foreach (var row in Rows)
+            {
+                avaliblespace = avaliblespace + row.AvalibleChairs();
+            }
+            return avaliblespace;
+        }
+
+        private bool DoesGroupFit(Group group)
+        {
+            return true;
+        }
+
+        public void AddGroup(Group group)
+        {
+
+        }
     }
 }

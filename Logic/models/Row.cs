@@ -29,5 +29,18 @@ namespace Logic.models
                 Chairs.Add(chair);
             }
         }
+
+        public int AvalibleChairs()
+        {
+            int avalibleChairs = 0;
+            foreach (var chair in Chairs)
+            {
+                if (chair.ChairPerson == null)
+                {
+                    avalibleChairs++;
+                }
+            }
+            return avalibleChairs;
+        }
     }
 }

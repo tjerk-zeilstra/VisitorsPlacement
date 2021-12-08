@@ -9,9 +9,15 @@ namespace Logic.Logic
 {
     public class SportEvent
     {
-        public List<Section> _sections = new();
+        private List<Section> _sections = new();
         private List<Person> _indviduals = new();
         private List<Group> _groups = new();
+        public DateTime EventDate;
+
+        public SportEvent(DateTime eventDate)
+        {
+            EventDate = eventDate;
+        }
 
         public void AddSection(int numRows, int numChairs)
         {
@@ -26,7 +32,10 @@ namespace Logic.Logic
 
         public void SortGroups()
         {
-
+            for (int i = 0; i < _groups.Count; i++)
+            {
+                _groups[i].SortPersons(EventDate);
+            }
         }
 
         private string GetSectionName(int sectionNum)
