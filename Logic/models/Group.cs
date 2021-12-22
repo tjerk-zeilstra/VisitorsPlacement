@@ -11,9 +11,23 @@ namespace Logic.models
     {
         public Group()
         {
-            People = new();
+           
         }
-        public List<Person> People = new();
+
+        public List<Person> People { get; private set; }
+
+        public int AmountOfChildren(DateTime eventDate)
+        {
+            int aChildren = 0;
+            foreach (var person in People)
+            {
+                if (!person.IsAdult(eventDate))
+                {
+                    aChildren++;
+                }
+            }
+            return aChildren;
+        }
 
         public void AddPerson(Person person)
         {

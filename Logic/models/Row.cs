@@ -30,6 +30,11 @@ namespace Logic.models
             }
         }
 
+        public void AddPerson(Person person)
+        {
+            Chairs[Chairs.Count - AvalibleChairs()].AddPerson(person);
+        }
+
         public int AvalibleChairs()
         {
             int avalibleChairs = 0;

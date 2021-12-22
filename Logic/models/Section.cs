@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logic.Exeptions;
 
 namespace Logic.models
 {
@@ -33,19 +34,46 @@ namespace Logic.models
             int avaliblespace = 0;
             foreach (var row in Rows)
             {
-                avaliblespace = avaliblespace + row.AvalibleChairs();
+                avaliblespace += row.AvalibleChairs();
             }
             return avaliblespace;
         }
 
-        private bool DoesGroupFit(Group group)
+        private void VerifyGroup(Group group, DateTime eventDate)
         {
-            return true;
+            //check if the group fits
+            if (group.People.Count > AvalibleSpaces())
+            {
+                throw new GroupDoesNotFit(AvalibleSpaces(), group.People.Count);
+            }
+
+            //check if there is an adult
+            bool checkforadult = group.People.Any(x => x.IsAdult(eventDate));
+            if (!checkforadult)
+            {
+                throw new GroupDoesNotContainAdult();
+            }
         }
 
-        public void AddGroup(Group group)
+        private int GetCurrentRow()
         {
+            for (int i = 0; i < Rows.Count; i++)
+            {
+                if (Rows[i].AvalibleChairs() > 0)
+                {
+                    return i;
+                }
+            }
+            throw new GroupDoesNotFit();
+        }
 
+        public void AddGroup(Group group, DateTime eventDate)
+        {
+            VerifyGroup(group, eventDate);
+            foreach (var person in group.People)
+            {
+                Rows[GetCurrentRow()].AddPerson(person);
+            }
         }
     }
 }

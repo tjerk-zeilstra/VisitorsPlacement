@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Logic.models;
+using Logic.Exeptions;
 
 namespace Logic.Logic
 {
@@ -12,7 +13,9 @@ namespace Logic.Logic
         private List<Section> _sections = new();
         private List<Person> _indviduals = new();
         private List<Group> _groups = new();
-        public DateTime EventDate;
+        public DateTime EventDate { get; set; }
+
+        public List<Section> GetSections() => _sections;
 
         public SportEvent(DateTime eventDate)
         {
@@ -23,14 +26,43 @@ namespace Logic.Logic
         {
             Section sectionNew = new(GetSectionName2());
             _sections.Add(sectionNew);
-
-            for (int i = 0; i < numRows; i++)
-            {
-                sectionNew.AddRows(numRows, numChairs); //TODO DI
-            }
+            sectionNew.AddRows(numRows, numChairs);
         }
 
-        public void SortGroups()
+        #region Add Group
+        public void AddGroup(Group group)
+        {
+            if (group.People.Count > AvilbleChairs())
+            {
+                throw new GroupDoesNotFit();
+            }
+
+            _groups.Add(group);
+        }
+
+        public int AvilbleChairs()
+        {
+            int chairs = 0;
+            int poeple = 0;
+
+            foreach (var section in _sections)
+            {
+                chairs += section.AvalibleSpaces();
+            }
+
+            foreach (var person in _groups)
+            {
+                poeple += person.People.Count;
+            }
+            poeple += _indviduals.Count;
+
+            return chairs - poeple;
+        }
+
+        #endregion
+
+        #region Sort Groups and Sections
+        private void SortGroups()
         {
             for (int i = 0; i < _groups.Count; i++)
             {
@@ -38,6 +70,45 @@ namespace Logic.Logic
             }
         }
 
+        private void SortSectionsOnSize()
+        {
+            for (int i = 0; i < _sections.Count; i++)
+            {
+                for (int j = 1; j < _sections.Count; j++)
+                {
+                    if (_sections[i].AvalibleSpaces() < _sections[j].AvalibleSpaces())
+                    {
+                        Section temp = _sections[i];
+                        _sections[i] = _sections[j];
+                        _sections[j] = temp;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Placement
+        public void Place()
+        {
+            SortSectionsOnSize();
+            SortGroups();
+
+            MakePlacement();
+        }
+
+        private void MakePlacement()
+        {
+            for (int i = 0; i < _groups.Count; i++)
+            {
+                for (int j = 0; j < _groups.Count; j++)
+                {
+
+                }
+            }
+        }
+        #endregion
+
+        #region Set section name
         private string GetSectionName(int sectionNum)
         {
             string name = string.Empty;
@@ -93,5 +164,6 @@ namespace Logic.Logic
 
             return name;
         }
+        #endregion
     }
 }

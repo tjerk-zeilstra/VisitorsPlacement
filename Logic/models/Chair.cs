@@ -17,7 +17,7 @@ namespace Logic.models
         {
             ChairNumber = chairnumber;
         }
-        public Person ChairPerson { get; private set; }
+        public Person ChairPerson { get; set; }
         public int ChairNumber { get; set; }
 
         public void AddPerson(Person person)

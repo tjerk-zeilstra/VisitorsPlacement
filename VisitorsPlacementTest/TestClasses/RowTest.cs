@@ -28,5 +28,36 @@ namespace VisitorsPlacementTest.TestClasses
                 Assert.AreEqual(_row.Chairs[i].ChairNumber, i + 1);
             }
         }
+
+        [TestMethod]
+        public void AvalibleChairsTest()
+        {
+            //arrange
+            int numofchairs = 10;
+            _row.AddChairs(numofchairs);
+
+            //act
+            int avalibleChairs = _row.AvalibleChairs();
+
+            //assert
+            Assert.AreEqual(numofchairs, avalibleChairs);
+        }
+
+
+        [TestMethod]
+        public void AddPerson()
+        {
+            //arrange
+            _row.AddChairs(10);
+            Person person = new();
+
+            //act
+            _row.AddPerson(person);
+
+            //assert
+            Assert.AreEqual(person, _row.Chairs[0].ChairPerson);
+            Assert.AreEqual(9, _row.AvalibleChairs());
+
+        }
     }
 }
