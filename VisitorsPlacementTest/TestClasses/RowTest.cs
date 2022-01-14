@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic.models;
-using Logic.Interfaces;
-using VisitorsPlacementTest.FakeClasses;
 
 namespace VisitorsPlacementTest.TestClasses
 {

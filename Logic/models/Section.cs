@@ -1,5 +1,4 @@
-﻿using Logic.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using Logic.Exeptions;
 
 namespace Logic.models
 {
-    public class Section
+    public class Section : IComparable<Section>
     {
         public Section(string sectionName)
         {
@@ -37,6 +36,22 @@ namespace Logic.models
                 avaliblespace += row.AvalibleChairs();
             }
             return avaliblespace;
+        }
+
+        public int AvalibleFrontRowSeats(DateTime eventDate)
+        {
+            int children = 0;
+            foreach (var row in Rows)
+            {
+                foreach (var chair in row.Chairs)
+                {
+                    if (chair.ChairPerson.IsAdult(eventDate))
+                    {
+                        children++;
+                    }
+                }
+            }
+            return children;
         }
 
         private void VerifyGroup(Group group, DateTime eventDate)
@@ -75,5 +90,19 @@ namespace Logic.models
                 Rows[GetCurrentRow()].AddPerson(person);
             }
         }
+
+        public void AddPerson(Person person)
+        {
+            Rows[GetCurrentRow()].AddPerson(person);
+        }
+
+        #region Icomparable
+        public int CompareTo(Section other)
+        {
+            if (this.Rows.Count < other.Rows.Count) return 1;
+            else if (this.Rows.Count > other.Rows.Count) return -1;
+            else return 0;
+        }
+        #endregion
     }
 }

@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic.models;
 using Logic.Exeptions;
-using Logic.Interfaces;
-using VisitorsPlacementTest.FakeClasses;
 using System.Collections.Generic;
 using System;
 
@@ -76,17 +74,17 @@ namespace VisitorsPlacementTest.TestClasses
             //arrange
             int adults = 5;
             int childs = 5;
-            int rows = 2;
-            int chairs = 2;
+            int rows = 3;
+            int chairs = 5;
             DateTime eventdate = new(2021, 06, 14);
             Group testgroup = new();
             for (int i = 0; i < adults; i++)
             {
-                testgroup.AddPerson(new() { DateOfBirth = new DateTime(2020, 06, 14) });
+                testgroup.AddPerson(new Person() { DateOfBirth = new DateTime(2020, 06, 14) });
             }
             for (int i = 0; i < childs; i++)
             {
-                testgroup.AddPerson(new() { DateOfBirth = new DateTime(1999, 06, 14) });
+                testgroup.AddPerson(new Person() { DateOfBirth = new DateTime(1999, 06, 14) });
             }
             section.AddRows(rows, chairs);
 
@@ -123,7 +121,7 @@ namespace VisitorsPlacementTest.TestClasses
             section.AddGroup(testgroup, eventdate);
         }
 
-        [TestMethod]
+        [TestMethod()]
         [ExpectedException(typeof(GroupDoesNotContainAdult))]
         public void AddGroup_No_Adults_ExceptionTest()
         {

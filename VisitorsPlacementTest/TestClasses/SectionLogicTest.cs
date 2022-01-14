@@ -6,7 +6,7 @@ namespace VisitorsPlacementTest.TestClasses
     [TestClass]
     public class SectionLogicTest
     {
-        SportEvent _sectionLogic;
+        PlacementEvent _sectionLogic;
 
         public SectionLogicTest()
         {
