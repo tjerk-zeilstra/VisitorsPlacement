@@ -46,5 +46,19 @@ namespace Logic.models
             }
             return avalibleChairs;
         }
+
+        public string RowToString(DateTime date)
+        {
+            StringBuilder row = new();
+
+            row.AppendLine("");
+            foreach (var chair in Chairs)
+            {
+                row.Append(chair.ChairToString(date));
+            }
+            row.AppendLine("");
+
+            return row.ToString();
+        }
     }
 }

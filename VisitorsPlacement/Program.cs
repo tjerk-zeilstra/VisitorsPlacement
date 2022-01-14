@@ -35,10 +35,16 @@ namespace VisitorsPlacement
         {
             DateTime eventdate = new(2022,2,4);
             PlacementEvent placementEvent = new PlacementEvent(eventdate);
-            
+
+            #region Setup
+            //Make Groups
             Group group1 = new();
             Group group2 = new();
 
+            //AddGroup
+            placementEvent.AddGroup(group1);
+
+            //FillGroups
             for (int i = 0; i < 3; i++)
             {
                 group1.AddPerson(new Person() { 
@@ -60,10 +66,14 @@ namespace VisitorsPlacement
                 });
             }
 
+            //AddSections
             placementEvent.AddSection(3, 5);
             placementEvent.AddSection(1, 4);
-            placementEvent.AddGroup(group1);
-           
+
+            #endregion
+
+            placementEvent.Place();
+
         }
     }
 }

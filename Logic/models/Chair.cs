@@ -23,5 +23,19 @@ namespace Logic.models
         {
             ChairPerson = person;
         }
+
+        public string ChairToString(DateTime date)
+        {
+            StringBuilder chair = new();
+            if (ChairPerson == null)
+            {
+                chair.AppendFormat("( )");
+            }
+            else
+            {
+                chair.AppendFormat("({0})", ChairPerson.PersonToString(date));
+            }
+            return chair.ToString();
+        }
     }
 }

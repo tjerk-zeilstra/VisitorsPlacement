@@ -38,6 +38,7 @@ namespace Logic.models
             return avaliblespace;
         }
 
+        //TODO WTF
         public int AvalibleFrontRowSeats(DateTime eventDate)
         {
             int children = 0;
@@ -94,6 +95,16 @@ namespace Logic.models
         public void AddPerson(Person person)
         {
             Rows[GetCurrentRow()].AddPerson(person);
+        }
+
+        public string SectionToString(DateTime date)
+        {
+            StringBuilder section = new();
+            foreach (var row in Rows)
+            {
+                section.AppendLine(row.RowToString(date));
+            }
+            return section.ToString();
         }
 
         #region Icomparable
