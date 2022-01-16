@@ -35,22 +35,18 @@ namespace Logic.models
 
         public void SortPersons(DateTime eventDate)
         {
-            for (int i = 0; i < People.Count; i++)
+            foreach (var person in People)
             {
-                if (!People[i].IsAdult(eventDate))
-                {
-                    var temp = People[i];
-                    People.Remove(People[i]);
-                    People.Insert(0, temp);
-                }
+                person.IsAdult(eventDate);
             }
+            People.Sort();
         }
 
         #region Icomparable
         public int CompareTo(Group other)
         {
-            if (this.People.Count > other.People.Count) return 1;
-            else if (this.People.Count < other.People.Count) return -1;
+            if (this.People.Count < other.People.Count) return 1;
+            else if (this.People.Count > other.People.Count) return -1;
             else return 0;
         }
         #endregion

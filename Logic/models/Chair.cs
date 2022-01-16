@@ -24,16 +24,25 @@ namespace Logic.models
             ChairPerson = person;
         }
 
+        public bool ChairHasAdult(DateTime eventdate)
+        {
+            if (ChairPerson != null)
+            {
+                return ChairPerson.IsAdult(eventdate);
+            }
+            return false;
+        }
+
         public string ChairToString(DateTime date)
         {
             StringBuilder chair = new();
             if (ChairPerson == null)
             {
-                chair.AppendFormat("( )");
+                chair.Append("( )");
             }
             else
             {
-                chair.AppendFormat("({0})", ChairPerson.PersonToString(date));
+                chair.Append("("+ChairPerson.PersonToString(date)+")");
             }
             return chair.ToString();
         }

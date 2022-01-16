@@ -100,7 +100,7 @@ namespace Logic.Logic
             foreach (var group in _groups)
             {
                 List<Section> placment = GetSectionsForGroup(group.People.Count);
-                PlaceGroup(placment, group);
+                PlaceGroupInSections(placment, group);
                 _sections.Sort();
             }
         }
@@ -169,18 +169,15 @@ namespace Logic.Logic
                 {
                     sections.Add(_sections[i]);
                     restwaarde -= avaliblespaces;
-                    i++;
+                    if(i != _sections.Count - 1) i++;
                 }
-                else
-                {
-                    break;
-                }
+                else break;
             }
             if (restwaarde > 0)
             {
                 while (true)
                 {
-                    if (_sections[i].AvalibleSpaces() >= restwaarde && i != _sections.Count){
+                    if (_sections[i].AvalibleSpaces() >= restwaarde && i != _sections.Count - 1){
                         i++;
                     }
                     else
@@ -195,8 +192,9 @@ namespace Logic.Logic
             return sections;
         }
 
-        private void PlaceGroup(List<Section> sections, Group group)
+        private void PlaceGroupInSections(List<Section> sections, Group group)
         {
+            group.SortPersons(EventDate);
             int children = group.AmountOfChildren(EventDate);
             if (sections.Count > group.People.Count - children)
             {
@@ -219,7 +217,6 @@ namespace Logic.Logic
                         }
                     }
                     group.People.Remove(tempperson);
-
                 }
                 //place children
                 foreach (var section in sections)
@@ -243,7 +240,12 @@ namespace Logic.Logic
                 {
                     sections[sectioncount].AddPerson(person);
                 }
-                else sectioncount++;
+                else
+                {
+                    sectioncount++;
+                    sections[sectioncount].AddPerson(person);
+                }
+                
             }
 
             //place rest

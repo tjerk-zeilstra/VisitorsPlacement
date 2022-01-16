@@ -38,21 +38,23 @@ namespace Logic.models
             return avaliblespace;
         }
 
-        //TODO WTF
         public int AvalibleFrontRowSeats(DateTime eventDate)
         {
             int children = 0;
+            int frontrow = Rows[0].Chairs.Count;
+
             foreach (var row in Rows)
             {
+                
                 foreach (var chair in row.Chairs)
                 {
-                    if (chair.ChairPerson.IsAdult(eventDate))
+                    if (!chair.ChairHasAdult(eventDate))
                     {
                         children++;
                     }
                 }
             }
-            return children;
+            return frontrow - children;
         }
 
         private void VerifyGroup(Group group, DateTime eventDate)
@@ -100,18 +102,20 @@ namespace Logic.models
         public string SectionToString(DateTime date)
         {
             StringBuilder section = new();
+            section.AppendLine("----"+SectionName+"----");
             foreach (var row in Rows)
             {
                 section.AppendLine(row.RowToString(date));
             }
+            section.AppendLine("-------");
             return section.ToString();
         }
 
         #region Icomparable
         public int CompareTo(Section other)
         {
-            if (this.Rows.Count < other.Rows.Count) return 1;
-            else if (this.Rows.Count > other.Rows.Count) return -1;
+            if (this.AvalibleSpaces() < other.AvalibleSpaces()) return 1;
+            else if (this.AvalibleSpaces() > other.AvalibleSpaces()) return -1;
             else return 0;
         }
         #endregion

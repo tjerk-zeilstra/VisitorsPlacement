@@ -43,36 +43,51 @@ namespace VisitorsPlacement
 
             //AddGroup
             placementEvent.AddGroup(group1);
+            //placementEvent.AddGroup(group2);
 
             //FillGroups
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 10; i++)
             {
-                group1.AddPerson(new Person() { 
+                group1.AddPerson(new Person()
+                {
                     DateOfBirth = new DateTime(1999, 1, 1),
-                    Name = "test adult"
+                    Name = "test adult" + i.ToString()
                 });
+                
+            }
+            for (int i = 0; i < 5; i++)
+            {
                 group1.AddPerson(new Person()
                 {
                     DateOfBirth = new DateTime(2021, 1, 1),
-                    Name = "test kind"
+                    Name = "test kind" + i.ToString()
                 });
             }
-            for (int i = 0; i < 5; i++)
+
+            for (int i = 0; i < 2; i++)
             {
                 group2.AddPerson(new Person()
                 {
                     DateOfBirth = new DateTime(1999, 1, 1),
                     Name = "test adult"
                 });
+                group2.AddPerson(new Person()
+                {
+                    DateOfBirth = new DateTime(2021, 1, 1),
+                    Name = "test kind"
+                });
             }
 
             //AddSections
-            placementEvent.AddSection(3, 5);
-            placementEvent.AddSection(1, 4);
+            placementEvent.AddSection(1, 5);
+            placementEvent.AddSection(2, 5);
 
             #endregion
 
             placementEvent.Place();
+
+            Console.WriteLine(placementEvent.GenerateString());
+            Console.ReadLine();
 
         }
     }
