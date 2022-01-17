@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Logic.models;
+using System;
 
 namespace VisitorsPlacementTest.TestClasses
 {
@@ -30,14 +31,33 @@ namespace VisitorsPlacementTest.TestClasses
         [TestMethod]
         public void PersonIsUnderaged()
         {
+            
             //arrange
             _person.DateOfBirth = new(2015, 2, 15);
+
 
             //act
             bool assert = _person.IsAdult(new(2021, 12, 4));
 
             //assert
             Assert.IsFalse(assert);
+        }
+
+        [TestMethod()]
+        [DataRow(2015, 2, 15, false)]
+        [DataRow(1999, 06, 14, true)]
+        [DataRow(2021, 12, 5, false)]
+        [DataRow(2021, 12 , 4, false)]
+        public void TestPersonIsAdult(int year, int month, int day, bool expected)
+        {
+            //arrange
+            _person.DateOfBirth = new DateTime(year, month, day);
+
+            //act
+            bool assertbool = _person.IsAdult(new DateTime(2021, 12, 4));
+
+            //assert
+            Assert.AreEqual(expected, assertbool);
         }
     }
 }

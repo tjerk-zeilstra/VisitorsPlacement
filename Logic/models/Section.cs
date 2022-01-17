@@ -18,6 +18,30 @@ namespace Logic.models
         public string SectionName { get; set; }
         public List<Row> Rows { get; set; }
 
+        public void PlaceChildrenInFrontRow(DateTime eventdate)
+        {
+            for (int i = 0; i < Rows.Count; i++)
+            {
+                for (int j = 0; j < Rows[i].Chairs.Count; j++)
+                {
+                    for (int u = 0; u < Rows.Count; u++)
+                    {
+                        for (int p = 0; p < Rows[u].Chairs.Count; p++)
+                        {
+                            if (Rows[u].Chairs[p].ChairHasAdult(eventdate) == true && Rows[i].Chairs[j].ChairHasAdult(eventdate) == false)
+                            {
+                                Person tempPerson = Rows[u].Chairs[p].ChairPerson;
+                                Rows[u].Chairs[p].ChairPerson = Rows[i].Chairs[j].ChairPerson;
+                                Rows[i].Chairs[j].ChairPerson = tempPerson;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
         public void AddRows(int numberOfRows, int numberOfChairs)
         {
             for (int i = 1; i <= numberOfRows; i++)

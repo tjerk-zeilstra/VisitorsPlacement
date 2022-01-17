@@ -53,7 +53,6 @@ namespace VisitorsPlacement
                     DateOfBirth = new DateTime(1999, 1, 1),
                     Name = "test adult" + i.ToString()
                 });
-                
             }
             for (int i = 0; i < 5; i++)
             {
@@ -88,7 +87,6 @@ namespace VisitorsPlacement
 
             Console.WriteLine(placementEvent.GenerateString());
             Console.ReadLine();
-
         }
     }
 }

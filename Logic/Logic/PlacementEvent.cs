@@ -103,6 +103,11 @@ namespace Logic.Logic
                 PlaceGroupInSections(placment, group);
                 _sections.Sort();
             }
+
+            foreach (var section in _sections)
+            {
+                section.PlaceChildrenInFrontRow(EventDate);
+            }
         }
 
         private List<Section> GetSectionsForGroupWithChildren(Group group)
@@ -221,18 +226,22 @@ namespace Logic.Logic
                 //place children
                 foreach (var section in sections)
                 {
-                    if (section.AvalibleFrontRowSeats(EventDate) != 0)
+                    children = group.AmountOfChildren(EventDate);
+                    if (children == 0) break;
+                    for (int i = 0; i < children; i++)
                     {
-                        if (group.AmountOfChildren(EventDate) != 0)
+                        int frontrow = section.AvalibleFrontRowSeats(EventDate);
+                        if (frontrow != 0)
                         {
                             section.AddPerson(group.People[0]);
                             group.People.Remove(group.People[0]);
                         }
+                        else break;
                     }
                 }
             }
 
-            //place group
+            //place Rest
             int sectioncount = 0;
             foreach(var person in group.People)
             {
@@ -247,8 +256,6 @@ namespace Logic.Logic
                 }
                 
             }
-
-            //place rest
         }
         #endregion
 

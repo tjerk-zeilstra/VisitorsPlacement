@@ -30,7 +30,7 @@ namespace Logic.models
             {
                 return ChairPerson.IsAdult(eventdate);
             }
-            return false;
+            return true;
         }
 
         public string ChairToString(DateTime date)
