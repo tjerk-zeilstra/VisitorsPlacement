@@ -10,7 +10,7 @@ namespace Logic.Logic
 {
     public class PlacementEvent
     {
-        private List<Section> _sections { get; set; }
+        public List<Section> _sections { get; set; }
         private List<Person> _indviduals { get; set; }
         public List<Group> _groups { get; set; }
         public DateTime EventDate { get; set; }

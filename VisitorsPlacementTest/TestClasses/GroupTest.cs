@@ -9,7 +9,7 @@ namespace VisitorsPlacementTest.TestClasses
     [TestClass]
     public class GroupTest
     {
-        Group _group;
+        readonly Group _group;
 
         public GroupTest()
         {

@@ -10,7 +10,7 @@ namespace VisitorsPlacementTest.TestClasses
     [TestClass]
     public class PlacementEventTest
     {
-        PlacementEvent _PlacementEvent;
+        readonly PlacementEvent _PlacementEvent;
 
         public PlacementEventTest()
         {
@@ -67,12 +67,39 @@ namespace VisitorsPlacementTest.TestClasses
         [DataRow(30, 1)]
         public void AddToLargeGroupTest(int adults, int children)
         {
+            //arange
             _PlacementEvent.AddSection(3, 5);
             _PlacementEvent.AddSection(3, 5);
             Group group = GroupFactory.MakeGroup(children, adults, _PlacementEvent.EventDate);
 
             //act
             _PlacementEvent.AddGroup(group);
+        }
+
+
+        [TestMethod]
+        [DataRow(3, 3)]
+        public void Place_Test_one_Section(int adults, int children)
+        {
+            //arrange
+            Group group = GroupFactory.MakeGroup(children, adults, _PlacementEvent.EventDate);
+
+            _PlacementEvent.AddSection(2, 3);
+            _PlacementEvent.AddGroup(group);
+
+            //act
+            _PlacementEvent.Place();
+
+            //asert
+            for (int i = 0; i < children; i++)
+            {
+                Assert.IsFalse(_PlacementEvent._sections[0].Rows[0].Chairs[i].ChairHasAdult(_PlacementEvent.EventDate));
+            }
+
+            for (int i = 0; i < adults; i++)
+            {
+                Assert.IsTrue(_PlacementEvent._sections[0].Rows[1].Chairs[i].ChairHasAdult(_PlacementEvent.EventDate));
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace VisitorsPlacementTest.TestClasses
     [TestClass]
     public class SectionTest
     {
-        Section section;
+        readonly Section section;
         public SectionTest()
         {
             section = new Section("A");

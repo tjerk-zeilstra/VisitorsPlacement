@@ -7,7 +7,7 @@ namespace VisitorsPlacementTest.TestClasses
     [TestClass]
     public class PersonTest
     {
-        Person _person;
+        readonly Person _person;
 
         public PersonTest()
         {
