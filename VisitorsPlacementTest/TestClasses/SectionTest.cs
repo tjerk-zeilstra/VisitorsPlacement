@@ -39,7 +39,7 @@ namespace VisitorsPlacementTest.TestClasses
             //arrange
             Person person = new()
             {
-                DateOfBirth = new System.DateTime(1999, 06, 14),
+                DateOfBirth = new DateTime(1999, 06, 14),
                 Name = "test"
             };
             Chair chair = new()

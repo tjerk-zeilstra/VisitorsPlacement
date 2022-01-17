@@ -17,15 +17,15 @@ namespace Logic.models
 
         public int AmountOfChildren(DateTime eventDate)
         {
-            int aChildren = 0;
+            int children = 0;
             foreach (var person in People)
             {
                 if (!person.IsAdult(eventDate))
                 {
-                    aChildren++;
+                    children++;
                 }
             }
-            return aChildren;
+            return children;
         }
 
         public void AddPerson(Person person)

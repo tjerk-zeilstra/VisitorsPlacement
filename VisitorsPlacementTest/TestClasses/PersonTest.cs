@@ -14,40 +14,12 @@ namespace VisitorsPlacementTest.TestClasses
             _person = new();
         }
 
-        [TestMethod]
-        public void PersonIsAdultTest()
-        {
-            //arrange
-            _person.DateOfBirth = new(1999, 06, 14);
-
-
-            //act
-            bool assert = _person.IsAdult(new(2021, 12, 4));
-
-            //assert
-            Assert.IsTrue(assert);
-        }
-
-        [TestMethod]
-        public void PersonIsUnderaged()
-        {
-            
-            //arrange
-            _person.DateOfBirth = new(2015, 2, 15);
-
-
-            //act
-            bool assert = _person.IsAdult(new(2021, 12, 4));
-
-            //assert
-            Assert.IsFalse(assert);
-        }
-
         [TestMethod()]
-        [DataRow(2015, 2, 15, false)]
-        [DataRow(1999, 06, 14, true)]
-        [DataRow(2021, 12, 5, false)]
-        [DataRow(2021, 12 , 4, false)]
+        [DataRow(2015, 2, 15, false)] // child
+        [DataRow(1999, 06, 14, true)] // adult
+        [DataRow(2003, 12, 4, true)] // exectly adult
+        [DataRow(2021, 12, 5, false)] // day after event
+        [DataRow(2021, 12 , 4, false)] // same day as event
         public void TestPersonIsAdult(int year, int month, int day, bool expected)
         {
             //arrange

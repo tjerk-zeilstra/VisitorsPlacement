@@ -41,7 +41,6 @@ namespace Logic.models
             }
         }
 
-
         public void AddRows(int numberOfRows, int numberOfChairs)
         {
             for (int i = 1; i <= numberOfRows; i++)

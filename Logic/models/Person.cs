@@ -36,6 +36,7 @@ namespace Logic.models
         }
         #endregion
 
+        #region ToString
         public string PersonToString(DateTime date)
         {
             StringBuilder person = new();
@@ -50,5 +51,6 @@ namespace Logic.models
             return person.ToString();
 
         }
+        #endregion
     }
 }

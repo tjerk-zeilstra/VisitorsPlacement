@@ -10,9 +10,9 @@ namespace Logic.Logic
 {
     public class PlacementEvent
     {
-        private List<Section> _sections = new();
-        private List<Person> _indviduals = new();
-        private List<Group> _groups = new();
+        private List<Section> _sections { get; set; }
+        private List<Person> _indviduals { get; set; }
+        public List<Group> _groups { get; set; }
         public DateTime EventDate { get; set; }
 
         public List<Section> GetSections() => _sections;
@@ -20,10 +20,15 @@ namespace Logic.Logic
         public PlacementEvent(DateTime eventDate)
         {
             EventDate = eventDate;
+            _sections = new();
+            _indviduals = new();
+            _groups = new();
         }
 
         public void AddSection(int numRows, int numChairs)
         {
+            if (numRows > 3 || numChairs > 10) throw new SectionToLarge();
+            if (numRows < 1 || numChairs < 3) throw new SectionToSmall();
             Section sectionNew = new(GetSectionName());
             _sections.Add(sectionNew);
             sectionNew.AddRows(numRows, numChairs);
@@ -40,10 +45,10 @@ namespace Logic.Logic
             _groups.Add(group);
         }
 
-        public int AvilbleChairs()
+        private int AvilbleChairs()
         {
             int chairs = 0;
-            int poeple = 0;
+            int persons = 0;
 
             foreach (var section in _sections)
             {
@@ -52,11 +57,11 @@ namespace Logic.Logic
 
             foreach (var person in _groups)
             {
-                poeple += person.People.Count;
+                persons += person.People.Count;
             }
-            poeple += _indviduals.Count;
+            persons += _indviduals.Count;
 
-            return chairs - poeple;
+            return chairs - persons;
         }
 
         #endregion
@@ -302,7 +307,7 @@ namespace Logic.Logic
         }
         #endregion
 
-        #region Train
+        #region Generate string for Console
         public string GenerateString()
         {
             StringBuilder placementevent = new();
